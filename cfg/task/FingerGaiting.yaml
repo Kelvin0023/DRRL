@@ -1,0 +1,87 @@
+# sim
+decimation: 1
+episode_length_s: 25  # 500 timesteps
+
+# task
+#num_actions: 12
+#num_observations: 28
+#num_states: 73
+#num_q_space: 49
+num_actions: 15
+num_observations: 35
+num_states: 88
+num_q_space: 58
+
+# rotation axis
+rotation_axis: 2  # 0: X, 1: Y, 2: Z
+
+# default hand and object parameters
+default_hand_joint_pos: [0, 0, 0, 0, 0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.45, 0.45, 0.45, 0.45, 0.45]
+#cube: [0, 0, 0, 0, 0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.45, 0.45, 0.45, 0.45, 0.45]
+#L-shape: [0, -0.1, -0.2, 0.18, 0.1, 0.32, -0.05, 0.3, -0.1, -0.05, 0.48, 0.78, 0.5, 0.88, 0.9]
+default_object_pos: [0.0, 0.0, 0.255]
+default_object_quat: [1.0, 0.0, 0.0, 0.0]
+
+# hand joint limits
+finger_dof_lower_limits: [-0.4, -0.4, -0.4, -0.4, -0.4, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.2, 0.2, 0.2, 0.2, 0.2]
+# L-shape: [-0.4, -0.4, -0.4, -0.4, -0.4, -0.1, -0.1, -0.1, -0.1, -0.1, 0.4, 0.4, 0.4, 0.4, 0.4]
+# cube: [-0.4, -0.4, -0.4, -0.4, -0.4, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.2, 0.2, 0.2, 0.2, 0.2]
+finger_dof_upper_limits: [0.4, 0.4, 0.4, 0.4, 0.4, 0.5, 0.5, 0.5, 0.5, 0.5, 0.6, 0.6, 0.6, 0.6, 0.6]
+# L-shape: [0.4, 0.4, 0.4, 0.4, 0.4, 0.5, 0.5, 0.5, 0.5, 0.5, 0.9, 0.9, 0.9, 0.9, 0.9]
+# cube: [0.4, 0.4, 0.4, 0.4, 0.4, 0.5, 0.5, 0.5, 0.5, 0.5, 0.6, 0.6, 0.6, 0.6, 0.6]
+
+# action scale
+action_scale: 0.1
+
+# reward
+ang_vel_clip_max: 0.5
+ang_vel_clip_min: -0.5
+rotation_reward_scale: 5.0 #1.0
+object_lin_vel_penalty_scale: -0.3
+pose_diff_penalty_scale: -0.0
+torque_penalty_scale: -0.0
+work_penalty_scale: 0.0
+ftip_obj_disp_pen: 0.0
+out_of_bounds_pen: 0.0
+
+# reset
+min_object_height: 0.225
+max_object_height: 0.285
+xy_object_lim: 0.05 #0.03
+num_contact_constraint: False
+required_ncon: 3
+contact_loc_constraint: False
+ftip_on_side_constraint: False
+ftip_on_side_constraint_tolerance: 0.04 # needed for 10x8x8x4_L (0.035) if states from tree span a large z range
+object_tilt_lim: 0.8
+
+# contact position marker
+visualize_contact_pos: False
+
+# PRM sampling state limits
+sample_obj_pos_lower_limit: [-0.03, -0.03, 0.225]
+sample_obj_pos_upper_limit: [0.03, 0.03, 0.275]
+sample_obj_lin_vel_lower_limit: [-0.03, -0.03, -0.2]
+sample_obj_lin_vel_upper_limit: [0.03, 0.03, 0.05]
+sample_obj_ang_vel_lower_limit: [-0.1, -0.1, -0.1]
+sample_obj_ang_vel_upper_limit: [0.1, 0.1, 0.1]
+sample_joint_vel_lower_limit: [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]
+sample_joint_vel_upper_limit: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+
+# PRM valid state limits
+valid_obj_pos_lower_limit: [-0.03, -0.03, 0.225]
+valid_obj_pos_upper_limit: [0.03, 0.03, 0.275]
+#valid_obj_lin_vel_lower_limit: [-0.1, -0.1, -0.3]
+#valid_obj_lin_vel_upper_limit: [0.1, 0.1, 0.1]
+valid_obj_lin_vel_lower_limit: [-0.05, -0.05, -0.05]
+valid_obj_lin_vel_upper_limit: [0.05, 0.05, 0.05]
+valid_obj_ang_vel_lower_limit: [-2.0, -2.0, -2.0]
+valid_obj_ang_vel_upper_limit: [2.0, 2.0, 2.0]
+valid_joint_vel_lower_limit: [-3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+valid_joint_vel_upper_limit: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0]
+
+# sampling validity check
+valid_contact_force_upper_limit: 10.0
+valid_req_valid_contact: True  # all contacts must be on the inside of fingers for task success
+valid_req_ncon_lim: True  # must be > n_contact_min contacts for task success
+valid_required_ncon: 3  # number of contacts required for task success

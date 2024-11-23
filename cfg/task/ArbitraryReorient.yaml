@@ -1,0 +1,87 @@
+# sim
+decimation: 1
+episode_length_s: 25  # 500 timesteps
+
+# task
+#num_actions: 12
+#num_observations: 39
+#num_states: 77
+#num_q_space: 49
+num_actions: 15
+num_observations: 46
+num_states: 92
+num_q_space: 58
+
+# default hand and object parameters
+default_hand_joint_pos: [0, 0, 0, 0, 0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.45, 0.45, 0.45, 0.45, 0.45]
+default_object_pos: [0.0, 0.0, 0.255]
+default_object_quat: [1.0, 0.0, 0.0, 0.0]
+
+# hand joint limits
+finger_dof_lower_limits: [-0.7, -0.7, -0.7, -0.7, -0.7, -0.39269908169, -0.39269908169, -0.39269908169, -0.39269908169, -0.39269908169, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001]
+finger_dof_upper_limits: [0.7, 0.7, 0.7, 0.7, 0.7, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1]
+
+# action scale
+action_scale: 0.1
+
+# sample target rotation within tilt limit of the Finger-gaiting task
+sample_target_rot_within_tilt: True
+rotation_axis: 2  # 0: X, 1: Y, 2: Z
+
+# reward
+delta_clip: 0.02  # clip the delta displacement between the current and target object position
+taskCompletionReward: 8.0  # reward for task completion
+deltaReward: 2.0  # reward for changes in object rotation
+outOfBoundsPenalty: 0.0  # penalty for object going out of bounds
+ftipObjDispPenalty: 0.0  # penalty for displacement between fingertip and object
+numContactPenalty: 1.0  # scalar penalty applied when n_contact < n_contact_min
+objPositionPenalty: 1.0  # penalty for object position deviation from default
+contactLocationPenalty: 1.0  # penalty for contact on back of finger
+
+# success
+angle_threshold: 0.4  # angular tolerance for successful reorientation
+joint_vel_threshold: 0.8  # Tao uses 0.25 but we have more DOF than they do
+object_vel_threshold: 0.04  # object linear velocity threshold for task success
+object_angvel_threshold: 0.5  # object angular velocity threshold for task success
+req_valid_contact: True  # all contacts must be on the inside of fingers for task success
+req_ncon_lim: True  # must be > n_contact_min contacts for task success
+
+# reset
+min_object_height: 0.225
+max_object_height: 0.275
+xy_object_lim: 0.03
+num_contact_constraint: False
+required_ncon: 3
+contact_loc_constraint: False
+ftip_on_side_constraint: False
+ftip_on_side_constraint_tolerance: 0.04
+object_tilt_lim: 0.8
+
+# contact position marker
+visualize_contact_pos: False
+
+# PRM sampling state limits
+sample_obj_pos_lower_limit: [-0.03, -0.03, 0.225]
+sample_obj_pos_upper_limit: [0.03, 0.03, 0.275]
+sample_obj_lin_vel_lower_limit: [-0.03, -0.03, -0.2]
+sample_obj_lin_vel_upper_limit: [0.03, 0.03, 0.05]
+sample_obj_ang_vel_lower_limit: [-0.1, -0.1, -0.1]
+sample_obj_ang_vel_upper_limit: [0.1, 0.1, 0.1]
+sample_joint_vel_lower_limit: [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]
+sample_joint_vel_upper_limit: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+
+# PRM valid state limits
+valid_obj_pos_lower_limit: [-0.03, -0.03, 0.225]
+valid_obj_pos_upper_limit: [0.03, 0.03, 0.275]
+valid_obj_lin_vel_lower_limit: [-0.1, -0.1, -0.3]
+valid_obj_lin_vel_upper_limit: [0.1, 0.1, 0.1]
+valid_obj_ang_vel_lower_limit: [-2.0, -2.0, -2.0]
+valid_obj_ang_vel_upper_limit: [2.0, 2.0, 2.0]
+valid_joint_vel_lower_limit: [-3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+valid_joint_vel_upper_limit: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0]
+
+# sampling validity check
+valid_contact_force_upper_limit: 10.0
+valid_req_valid_contact: True  # all contacts must be on the inside of fingers for task success
+valid_req_ncon_lim: True  # must be > n_contact_min contacts for task success
+valid_required_ncon: 3  # number of contacts required for task success

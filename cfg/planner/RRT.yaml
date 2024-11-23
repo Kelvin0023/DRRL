@@ -1,0 +1,14 @@
+_target_: algo.prm.RRT
+
+rollout_len: 8
+first_step: True
+samples_per_epoch: 32
+visualize_reset_states: False
+visualize_rrt_tree: True
+local_planner: policy
+run_once: False
+extract_optimal: False
+num_reset_states: 10000
+
+save_states: False
+states_file_name: ArbitraryReorientation-PP.npy
